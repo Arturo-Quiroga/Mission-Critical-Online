@@ -44,8 +44,8 @@ resource "azurerm_linux_web_app" "appservice" {
   }
 
   site_config {
-    always_on                   = true
-    scm_use_main_ip_restriction = true
+    always_on                               = true
+    scm_use_main_ip_restriction             = true
     container_registry_use_managed_identity = true
 
     application_stack {

@@ -16,8 +16,8 @@ resource "azurerm_role_assignment" "loganalyticsreader_role" {
 
 # user assigned managed identity
 resource "azurerm_user_assigned_identity" "loganalytics_reader_mi" {
-  for_each             = var.stamps
-  
+  for_each = var.stamps
+
   location            = azurerm_resource_group.rg[each.key].location
   resource_group_name = azurerm_resource_group.rg[each.key].name
 
