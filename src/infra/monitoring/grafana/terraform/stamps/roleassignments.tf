@@ -28,5 +28,5 @@ resource "azurerm_role_assignment" "loganalytics_reader_mi_role" {
   for_each             = var.stamps
   scope                = data.azurerm_subscription.current.id
   role_definition_name = "Log Analytics Reader"
-  principal_id         = azurerm_user_assigned_identity.loganalytics_reader_mi[each.key].identity[0].principal_id
+  principal_id         = azurerm_user_assigned_identity.loganalytics_reader_mi[each.key].principal_id
 }
