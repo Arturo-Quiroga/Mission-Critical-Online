@@ -21,7 +21,7 @@ resource "azurerm_user_assigned_identity" "loganalytics_reader_mi" {
   location            = azurerm_resource_group.rg[each.key].location
   resource_group_name = azurerm_resource_group.rg[each.key].name
 
-  name = "loganalytics-reader"
+  name = "${local.prefix}-${substr(each.value["location"], 0, 5)}-identity"
 }
 
 resource "azurerm_role_assignment" "loganalytics_reader_mi_role" {
