@@ -13,3 +13,20 @@ resource "azurerm_role_assignment" "loganalyticsreader_role" {
   role_definition_name = "Log Analytics Reader"
   principal_id         = azurerm_linux_web_app.appservice[each.key].identity[0].principal_id
 }
+
+# user assigned managed identity
+resource "azurerm_user_assigned_identity" "loganalytics_reader_mi" {
+  for_each             = var.stamps
+  
+  location            = azurerm_resource_group.rg[each.key].location
+  resource_group_name = azurerm_resource_group.rg[each.key].name
+
+  name = "loganalytics-reader"
+}
+
+resource "azurerm_role_assignment" "loganalytics_reader_mi_role" {
+  for_each             = var.stamps
+  scope                = data.azurerm_subscription.current.id
+  role_definition_name = "Log Analytics Reader"
+  principal_id         = azurerm_user_assigned_identity.loganalytics_reader_mi[each.key].identity[0].principal_id
+}

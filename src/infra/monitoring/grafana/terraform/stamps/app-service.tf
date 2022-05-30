@@ -21,7 +21,10 @@ resource "azurerm_linux_web_app" "appservice" {
   https_only          = true
 
   identity {
-    type = "SystemAssigned"
+    type = "UserAssigned"
+    identity_ids = [
+      azurerm_user_assigned_identity.loganalytics_reader_mi[each.key].identity[0].principal_id
+    ]
   }
 
   // these env variables are specific to postgres backend supported by grafana
