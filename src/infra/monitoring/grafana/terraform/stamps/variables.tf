@@ -49,7 +49,7 @@ variable "db_admin_user" {
 variable "wapp_container_image" {
   description = "Docker image to use for Grafana."
   type        = string
-  default     = "heoelri/grafana:v3"
+  default     = "grafana/grafana:latest"
 }
 
 variable "frontdoor_header_id" {
