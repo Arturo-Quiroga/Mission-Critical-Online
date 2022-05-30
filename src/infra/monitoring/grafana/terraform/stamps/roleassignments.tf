@@ -30,3 +30,10 @@ resource "azurerm_role_assignment" "loganalytics_reader_mi_role" {
   role_definition_name = "Log Analytics Reader"
   principal_id         = azurerm_user_assigned_identity.loganalytics_reader_mi[each.key].principal_id
 }
+
+resource "azurerm_role_assignment" "acrpull_role_umi" {
+  for_each             = var.stamps
+  scope                = var.acr_resource_id
+  role_definition_name = "AcrPull"
+  principal_id         = azurerm_user_assigned_identity.loganalytics_reader_mi[each.key].principal_id
+}
